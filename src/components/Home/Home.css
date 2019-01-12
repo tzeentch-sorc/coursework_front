@@ -1,0 +1,65 @@
+.parallax{
+    position: relative;
+    opacity: 0.8;
+    background-image: url("../../resources/mandala.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    width: 100%;
+    min-height: 100%;
+}
+
+.vangog{
+    background-image: url("../../resources/vangog.jpg");
+    min-height: 600px;
+}
+
+.pict2{
+    background-image: url("../../resources/pictHome.jpg");
+    min-height: 800px;
+}
+
+.end{
+    min-height: 300px;
+}
+
+@media only screen and (max-device-width: 1166px) {
+    .parallax {
+        background-attachment: scroll;
+    }
+}
+
+.home{
+    height: 100%;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.caption span.border{
+    background-color: #111;
+    color: #fff;
+    padding: 18px;
+    font-size: 25px;
+    letter-spacing: 10px;
+}
+
+.caption{
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    color: #000;
+    font: 400 15px/1.8 "Lato", sans-serif;
+}
+.home div{
+    display: block;
+}
+
+.home .pi{
+    background-color: #E7D62D;
+}

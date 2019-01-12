@@ -1,0 +1,37 @@
+.my-gallery{
+    top: 10%;
+    min-width: 350px;
+    /*align-content: center;*/
+    /*align-items: center;*/
+}
+
+.header{
+    /*position: relative;*/
+}
+
+.view-panel{
+    /*border: red 1px solid;*/
+    margin: 0 6% 10%;
+}
+
+.view-type{
+    z-index: -3;
+}
+
+.view-type button{
+    z-index: 0;
+}
+
+.p-dataview-header{
+    z-index: -1;
+}
+
+.goBack{
+    position: fixed;
+    top: 95%;
+    right: 0;
+}
+
+.goBack i{
+    color: black;
+}

@@ -1,0 +1,15 @@
+.msg h1{
+    text-align: center;
+}
+
+.msg h2{
+    text-align: center;
+}
+
+.msg img{
+    display: block; margin-left: auto; margin-right: auto;
+}
+
+.msg{
+    margin-top: 100px;
+}
