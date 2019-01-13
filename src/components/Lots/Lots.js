@@ -4,30 +4,17 @@ import Lot from '../Lot/Lot'
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
-import {Paginator} from 'primereact/paginator';
 
 import {DataView, DataViewLayoutOptions} from 'primereact/dataview';
 import {Dropdown} from "primereact/dropdown";
+import {connect} from "react-redux";
 
 class Lots extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            items: [
-                {name: 'hello'},
-                {name: 'a'},
-                {name: 'hello2'},
-                {name: 'hello3'},
-                {name: 'hello12'},
-                {name: 'hello23'},
-                {name: 'hello12'},
-                {name: 'hello134'},
-                {name: 'hello2234'},
-                {name: 'hello324354'},
-                {name: 'hello12345'},
-                {name: 'hello21234'}
-            ],
+            items: [],
             layout: 'list',
             first: 0,
             rows : 6,
@@ -37,6 +24,11 @@ class Lots extends React.Component {
         this.itemTemplate = this.itemTemplate.bind(this);
         this.onPageChange = this.onPageChange.bind(this);
         this.onSortChange = this.onSortChange.bind(this);
+    }
+
+    componentDidMount() {
+        const { items} = this.props;
+        this.setState({ items });
     }
 
     onPageChange(event) {
@@ -67,7 +59,16 @@ class Lots extends React.Component {
 
     itemTemplate(item, layout) {
         return (
-            <Lot name={item.name + '_' + layout} renderType={layout}/>
+            <Lot
+                id={item.id}
+                name={item.name}
+                author={item.author}
+                expDate={item.expDate}
+                seller={item.seller}
+                bet={item.bet}
+                description={item.description}
+
+                 renderType={layout}/>
         )
     }
 
@@ -80,10 +81,11 @@ class Lots extends React.Component {
 
         return(
                 <div>
-                    <div style={{textAlign: 'left', zIndex: -1}} >
+                    <div style={{textAlign: 'left', zIndex: -1, float:'left'}} >
                         <Dropdown options={sortOptions} value={this.state.sortKey} placeholder="Sort By" onChange={this.onSortChange} />
                     </div>
-                    <div style={{textAlign: 'right', zIndex: -1}} >
+                    {/*<div className={"spacer"}/>*/}
+                    <div style={{textAlign: 'right', zIndex: -1, margin:'0.5em'}} >
                         <DataViewLayoutOptions className={"view-type"} layout={this.state.layout} onChange={(e) => this.setState({layout: e.value})} />
                     </div>
                 </div>
@@ -97,9 +99,6 @@ class Lots extends React.Component {
 
         return(
             <div className={"lots-list-main"}>
-                <div className={'header'}>
-                    <h2>LOTS PAGE</h2>
-                </div>
                 <div className={'view-panel'}>
                     <DataView value={this.state.items}
                               layout={this.state.layout}
@@ -127,4 +126,13 @@ class Lots extends React.Component {
     }
 }
 
-export default Lots;
+function mapStateToProps(state){
+    return { items: state.lotListReducer.items}
+}
+
+function mapDispatchToProps(dispatch){
+    return {
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Lots);

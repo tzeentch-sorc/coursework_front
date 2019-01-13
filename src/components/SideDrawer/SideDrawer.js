@@ -9,6 +9,11 @@ const sideDrawer = props => {
 
     return(
         <div className={drawerClasses}>
+            <div className={"side-drawer_logo"}>
+                <span>
+                    THE IMPERIAL AUCTION HOUSE
+                </span>
+            </div>
             <Navelems handler={props.click}/>
         </div>
     )

@@ -2,11 +2,26 @@ import React from 'react'
 import Pict from '../../resources/pict.png';
 import {ScrollPanel} from 'primereact/scrollpanel';
 import './Lot.css'
+import {withRouter} from "react-router-dom";
+import {setCurrentLot} from "../../actions/listAction";
+import {connect} from "react-redux";
 class Lot extends React.Component{
+    constructor(props){
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(event){
+        this.props.setCurrentLot(this.props.id);
+        let { history } = this.props;
+        history.push('/lot');
+
+    }
+
 
     render() {
             return (
-                <div style={{ padding: '.5em' }} className={"lot " + this.props.renderType}>
+                <div style={{ padding: '.5em' }} className={"lot " + this.props.renderType} onClick={this.handleClick}>
                     <img src={Pict} alt=""/>
                     <div className={"lot-details"}>
 
@@ -17,7 +32,7 @@ class Lot extends React.Component{
                                         Name:
                                     </td>
                                     <td className={'val'}>
-                                        Artifex аrmifer digitis
+                                        {this.props.name}
                                     </td>
                                 </tr>
                                 <tr>
@@ -25,7 +40,7 @@ class Lot extends React.Component{
                                         Author:
                                     </td>
                                     <td className={'val'}>
-                                        Author_NAME
+                                        {this.props.author}
                                     </td>
                                 </tr>
                                 <tr>
@@ -33,27 +48,17 @@ class Lot extends React.Component{
                                         Exp Date:
                                     </td>
                                     <td className={'val'}>
-                                        {(new Date()).toDateString()}
+                                        {this.props.expDate}
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
-                        <hr/>
                         <ScrollPanel className={"description"} style={{width: '100%', height: '80px', margin: 0}}>
-                            Artifex аrmifer digitis dextris oculis occultis!Oh great Machine God, we beseech thee to deliver us from danger
-                            Oh great Machine God, we beseech thee to bring life into the inanimate
-                            Oh great Machine God, we beseech thee to invest this metal carcass with your spirit
-                            Oh great Machine God, we beseech thee to bring forth the holy en-djinnMay your weapon be guarded against malfunction.
-                            As your soul is guarded from impurity.
-                            The Machine God watches over you.
-                            Unleash the weapons of war.
-                            Unleash the Deathdealer.Toll the Great Bell once!
-                            Pull the Lever forward to engage the
-                            Piston and Pump…
-
+                            {this.props.description}
                         </ScrollPanel>
                     </div>
                 </div>
+
             );
 
 
@@ -61,5 +66,17 @@ class Lot extends React.Component{
 
 }
 
-export default Lot;
+function mapStateToProps(state){
+    return { currentLot: state.currentLotReducer.currentLot}
+}
+
+function mapDispatchToProps(dispatch){
+    return {
+        setCurrentLot: (lotID) => {
+            dispatch(setCurrentLot(lotID));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Lot));
 

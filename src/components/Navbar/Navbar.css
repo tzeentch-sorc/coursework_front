@@ -1,7 +1,7 @@
 .navbar{
     position: fixed;
     width: 100%;
-    background: #521751;
+    background: linear-gradient(63.70093280567107deg, rgba(250, 72, 105,1) 2.213541666666667%,rgba(249, 71, 105,1) 2.213541666666667%,rgba(170, 31, 240,1) 101.17187499999999%);
     height: 56px;
     top: 0;
     left: 0;
@@ -16,10 +16,13 @@
 }
 
 .navbar_logo{
-    color: white;
+    color: rgba(255,255,255, 0.95);
     text-decoration: none;
     font-size: 1.5rem;
-    margin-left: 1rem;
+    margin-left: 2rem;
+    background: url("../../resources/Aquila_v3.png") center no-repeat;
+    background-size: 80%;
+    text-shadow: 1px 0 0 #111, 0 -1px 0 #111, 0 1px 0 #111, -1px 0 0 #111;
 }
 
 .navbar_nav-items{

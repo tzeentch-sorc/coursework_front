@@ -63,3 +63,11 @@
 .home .pi{
     background-color: #E7D62D;
 }
+
+.text-box{
+    color: #777;
+    background-color: white;
+    padding:50px 60px;
+    text-align: justify;
+    position: relative;
+}

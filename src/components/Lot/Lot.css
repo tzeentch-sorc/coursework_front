@@ -4,6 +4,15 @@
     border: 1px lightgray solid;
     margin: 10px 30px 15px;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.lot table{
+    border-collapse: collapse;
+}
+
+.lot td{
+    border-bottom: #777 1px solid;
 }
 
 .lot img{
@@ -95,6 +104,7 @@
 .grid .val{
     font-size: 12px;
 }
+
 
 
 

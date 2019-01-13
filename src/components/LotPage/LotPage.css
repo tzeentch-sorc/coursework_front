@@ -1,0 +1,46 @@
+.LotPage{
+    width: 70%;
+    height: auto;
+    min-width: 400px;
+    margin: 10% 15%;
+    padding: 15px 5%;
+    border: black 1px solid;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.p-fieldset-legend{
+    font: 400 18px "Lato", sans-serif;
+    font-weight: 800;
+    text-align: left;
+    color: black;
+}
+
+.p-fieldset{
+    text-align: justify;
+}
+
+.lot-page-img-container img{
+    width: 100%;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.8);
+}
+
+.info{
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: 100%;
+    text-align: center;
+}
+
+.info thead{
+    text-align: left;
+    padding-left: 15px;
+    border-bottom: #777777 solid 1px;
+}
+
+.info td{
+    padding-left: 20px;
+    width: 50%;
+}

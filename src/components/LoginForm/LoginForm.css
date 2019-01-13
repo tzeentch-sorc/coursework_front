@@ -1,0 +1,31 @@
+.l-form{
+    padding: 10px;
+    border: #777 solid 1px;
+    border-radius: 5px;
+    margin: 5px 25% 30px;
+    min-width: 300px;
+    text-align: center;
+}
+
+.l-form .p-inputgroup{
+    margin: 10px;
+    width: 100%;
+}
+
+.l-form .p-inputgroup{
+    margin: 10px;
+    width: 100%;
+}
+
+.l-form .input{
+    width: 100%;
+    margin-right: 5%;
+}
+
+.l-form .p-button-success{
+    width: 30%;
+    height: 40px;
+    margin: 20px;
+}
+
+
