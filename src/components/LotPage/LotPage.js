@@ -40,7 +40,7 @@ class LotPage extends React.Component{
                         <thead>
                         <tr>
                             <td>
-                                Lot information:
+                                Lot name: "{lot.name}"
                             </td>
                         </tr>
                         </thead>
@@ -50,8 +50,8 @@ class LotPage extends React.Component{
                             <td>{lot.author}</td>
                         </tr>
                         <tr>
-                            <td>Expiration Date:</td>
-                            <td>{lot.expDate}</td>
+                            <td>Sertificate №:</td>
+                            <td>%CERTIFICATE_ID%</td>
                         </tr>
                         <tr>
                             <td>Seller:</td>
@@ -60,6 +60,10 @@ class LotPage extends React.Component{
                         <tr>
                             <td>Current bet:</td>
                             <td>{lot.bet}</td>
+                        </tr>
+                        <tr>
+                            <td>Expiration Date:</td>
+                            <td>{lot.expDate}</td>
                         </tr>
                         </tbody>
                     </table>

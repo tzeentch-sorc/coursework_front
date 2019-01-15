@@ -10,6 +10,7 @@ import {Route, Switch, Redirect} from "react-router-dom";
 import LoginPage from "./components/LoginPage/LoginPage";
 import Register from "./components/Register/Register";
 import LotPage from "./components/LotPage/LotPage";
+import Profile from "./components/Profile/Profile";
 
 class App extends Component {
   state = {
@@ -47,6 +48,7 @@ class App extends Component {
                     <Route path={"/login"} component={LoginPage}/>
                     <Route path={"/register"} component={Register}/>
                     <Route path={"/lot"} component={LotPage}/>
+                    <Route path={"/profile"} component={Profile}/>
                     <Route path='/404' component={Notfound} />
                     <Redirect to={'/404'} />
                 </Switch>

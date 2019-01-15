@@ -68,7 +68,7 @@ class Lots extends React.Component {
                 bet={item.bet}
                 description={item.description}
 
-                 renderType={layout}/>
+                renderType={layout}/>
         )
     }
 

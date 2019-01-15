@@ -1,6 +1,6 @@
 import React  from 'react';
 import './Notfound.css'
-import Aquila from '../../resources/aquila.jpg'
+import Aquila from '../../resources/Aquila_v3.png'
 const notFound = props => (
     <div className={'msg'}>
         <h1>

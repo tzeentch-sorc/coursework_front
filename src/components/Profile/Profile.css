@@ -1,0 +1,9 @@
+.profile-main{
+    width: 90%;
+    height: auto;
+    min-width: 400px;
+    margin: 10% 5%;
+    border-radius: 5px;
+    text-align: center;
+    min-height: 800px;
+}

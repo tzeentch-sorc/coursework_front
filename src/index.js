@@ -11,6 +11,8 @@ import './index.css'
 import {Provider} from "react-redux";
 import rootReducer from "./reducers/rootReducer";
 
+const date = new Date().toDateString();
+
 const composeEnhancers = composeWithDevTools({
     // Specify name here, actionsBlacklist, actionsCreators and other options if needed
 });
@@ -40,7 +42,7 @@ const store = createStore(rootReducer,
                     id: 1,
                     name: 'hello1',
                     author: 'Ван Гог, Винсент',
-                    expDate: new Date().toDateString(),
+                    expDate: date,
                     seller: 'King Arthur',
                     bet: 1000,
                     description: desc
@@ -49,7 +51,7 @@ const store = createStore(rootReducer,
                     id: 2,
                     name: 'hello2',
                     author: 'Ван Гог, Винсент',
-                    expDate: new Date().toDateString(),
+                    expDate: date,
                     seller: 'King Arthur',
                     bet: 1000,
                     description: desc
@@ -58,7 +60,7 @@ const store = createStore(rootReducer,
                     id: 3,
                     name: 'hello3',
                     author: 'Ван Гог, Винсент',
-                    expDate: new Date().toDateString(),
+                    expDate: date,
                     seller: 'King Arthur',
                     bet: 1000,
                     description: desc
@@ -67,7 +69,7 @@ const store = createStore(rootReducer,
                     id: 4,
                     name: 'hello4',
                     author: 'Ван Гог, Винсент',
-                    eexpDate: new Date().toDateString(),
+                    expDate: date,
                     seller: 'King Arthur',
                     bet: 1000,
                     description: desc
@@ -76,7 +78,7 @@ const store = createStore(rootReducer,
                     id: 5,
                     name: 'hello5',
                     author: 'Ван Гог, Винсент',
-                    expDate: new Date().toDateString(),
+                    expDate: date,
                     seller: 'King Arthur',
                     bet: 1000,
                     description: desc
@@ -85,7 +87,61 @@ const store = createStore(rootReducer,
                     id: 6,
                     name: 'hello6',
                     author: 'Ван Гог, Винсент',
-                    expDate: new Date().toDateString(),
+                    expDate: date,
+                    seller: 'King Arthur',
+                    bet: 1000,
+                    description: desc
+                },
+                {
+                    id: 1,
+                    name: 'hello1',
+                    author: 'Ван Гог, Винсент',
+                    expDate: date,
+                    seller: 'King Arthur',
+                    bet: 1000,
+                    description: desc
+                },
+                {
+                    id: 2,
+                    name: 'hello2',
+                    author: 'Ван Гог, Винсент',
+                    expDate: date,
+                    seller: 'King Arthur',
+                    bet: 1000,
+                    description: desc
+                },
+                {
+                    id: 3,
+                    name: 'hello3',
+                    author: 'Ван Гог, Винсент',
+                    expDate: date,
+                    seller: 'King Arthur',
+                    bet: 1000,
+                    description: desc
+                },
+                {
+                    id: 4,
+                    name: 'hello4',
+                    author: 'Ван Гог, Винсент',
+                    expDate: date,
+                    seller: 'King Arthur',
+                    bet: 1000,
+                    description: desc
+                },
+                {
+                    id: 5,
+                    name: 'hello5',
+                    author: 'Ван Гог, Винсент',
+                    expDate: date,
+                    seller: 'King Arthur',
+                    bet: 1000,
+                    description: desc
+                },
+                {
+                    id: 6,
+                    name: 'hello6',
+                    author: 'Ван Гог, Винсент',
+                    expDate: date,
                     seller: 'King Arthur',
                     bet: 1000,
                     description: desc

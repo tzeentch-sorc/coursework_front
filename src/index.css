@@ -4,6 +4,7 @@ body{
     font-family: sans-serif;
     height: 100%;
     display: block;
+    background: linear-gradient(46.71222351534266deg, rgba(243, 72, 104,1) 1.5442708333333335%,rgba(242, 72, 104,1) 1.5442708333333335%,rgba(26, 232, 232,1) 96.6484375%) fixed no-repeat center;
 }
 
 html{
@@ -16,5 +17,5 @@ body, html {
     height: 100%;
     margin: 0;
     font: 400 15px/1.8 "Lato", sans-serif;
-    color: #777;
+    color: #555;
 }
