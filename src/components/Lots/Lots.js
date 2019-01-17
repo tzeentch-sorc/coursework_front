@@ -60,14 +60,7 @@ class Lots extends React.Component {
     itemTemplate(item, layout) {
         return (
             <Lot
-                id={item.id}
-                name={item.name}
-                author={item.author}
-                expDate={item.expDate}
-                seller={item.seller}
-                bet={item.bet}
-                description={item.description}
-
+                lot={item}
                 renderType={layout}/>
         )
     }

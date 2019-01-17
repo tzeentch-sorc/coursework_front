@@ -4,6 +4,7 @@ import connect from "react-redux/es/connect/connect";
 import './LotPage.css'
 import Vangog from './../../resources/vangog.jpg'
 import {Fieldset} from "primereact/fieldset";
+import Similar from "../Similar/Similar";
 
 
 class LotPage extends React.Component{
@@ -16,62 +17,75 @@ class LotPage extends React.Component{
 
     componentWillMount() {
         window.scrollTo(0, 0);
-        const {currentLot} = this.props;
-        const {items} = this.props;
-        const lot = items.find((item) =>{
-            return item.id === currentLot;
-        });
-        this.setState({lot});
+        // const {currentLot} = this.props;
+        // const {items} = this.props;
+        // const lot = items.find((item) =>{
+        //     return item.id === currentLot;
+        // });
+        // this.setState({lot});
 
     }
 
+    // componentDidUpdate(nextProps, nextState, nextContext) {
+    //
+    // }
+
     render() {
-        const lot = this.state.lot;
+        const lot = this.props.currentLot;
         return(
-            <div className={'LotPage'}>
-                <h2>Lot #{lot.id} information</h2>
-                <hr/>
-                <div className={'lot-page-img-container'}>
-                    <img src={Vangog} alt={""}/>
+            <div>
+                <div className={'LotPage'}>
+                    <h2>Lot #{lot.id} information</h2>
+                    <hr/>
+                    <div className={'lot-page-img-container'}>
+                        <img src={Vangog} alt={""}/>
+                    </div>
+                    <hr/>
+                    <div>
+                        <table className={"info"}>
+                            <thead>
+                            <tr>
+                                <td>
+                                    Lot name: "{lot.name}"
+                                </td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Author:</td>
+                                <td>{lot.author}</td>
+                            </tr>
+                            <tr>
+                                <td>Genre:</td>
+                                <td>{lot.genre}</td>
+                            </tr>
+                            <tr>
+                                <td>Sertificate №:</td>
+                                <td>%CERTIFICATE_ID%</td>
+                            </tr>
+                            <tr>
+                                <td>Seller:</td>
+                                <td>{lot.seller}</td>
+                            </tr>
+                            <tr>
+                                <td>Current bet:</td>
+                                <td>{lot.bet}</td>
+                            </tr>
+                            <tr>
+                                <td>Expiration Date:</td>
+                                <td>{lot.expDate}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr/>
+                    <Fieldset legend={lot.name}>
+                        {lot.description}
+                    </Fieldset>
                 </div>
-                <hr/>
-                <div>
-                    <table className={"info"}>
-                        <thead>
-                        <tr>
-                            <td>
-                                Lot name: "{lot.name}"
-                            </td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Author:</td>
-                            <td>{lot.author}</td>
-                        </tr>
-                        <tr>
-                            <td>Sertificate №:</td>
-                            <td>%CERTIFICATE_ID%</td>
-                        </tr>
-                        <tr>
-                            <td>Seller:</td>
-                            <td>{lot.seller}</td>
-                        </tr>
-                        <tr>
-                            <td>Current bet:</td>
-                            <td>{lot.bet}</td>
-                        </tr>
-                        <tr>
-                            <td>Expiration Date:</td>
-                            <td>{lot.expDate}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div className={"SimilarPage"}>
+                    <Similar genre={lot.genre}/>
                 </div>
-                <hr/>
-                <Fieldset legend={lot.name}>
-                    {lot.description}
-                </Fieldset>
             </div>
         );
     }

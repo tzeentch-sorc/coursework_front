@@ -16,6 +16,7 @@
     "react-transition-group": "^2.5.2",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.7",
+    "redux-state-change-listener": "^0.1.6",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {

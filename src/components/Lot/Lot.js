@@ -12,12 +12,12 @@ class Lot extends React.Component{
     }
 
     handleClick(event){
-        this.props.setCurrentLot(this.props.id);
+        this.props.setCurrentLot(this.props.lot);
         let { history } = this.props;
+        window.scroll(0,0);
         history.push('/lot');
 
     }
-
 
     render() {
             return (
@@ -32,7 +32,7 @@ class Lot extends React.Component{
                                         Name:
                                     </td>
                                     <td className={'val'}>
-                                        {this.props.name}
+                                        {this.props.lot.name}
                                     </td>
                                 </tr>
                                 <tr>
@@ -40,7 +40,7 @@ class Lot extends React.Component{
                                         Author:
                                     </td>
                                     <td className={'val'}>
-                                        {this.props.author}
+                                        {this.props.lot.author}
                                     </td>
                                 </tr>
                                 <tr>
@@ -48,13 +48,13 @@ class Lot extends React.Component{
                                         Exp Date:
                                     </td>
                                     <td className={'val'}>
-                                        {this.props.expDate}
+                                        {this.props.lot.expDate}
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
                         <ScrollPanel className={"description"} style={{width: '100%', height: '80px', margin: 0}}>
-                            {this.props.description}
+                            {this.props.lot.description}
                         </ScrollPanel>
                     </div>
                 </div>
@@ -67,7 +67,9 @@ class Lot extends React.Component{
 }
 
 function mapStateToProps(state){
-    return { currentLot: state.currentLotReducer.currentLot}
+    return { currentLot: state.currentLotReducer.currentLot
+
+    }
 }
 
 function mapDispatchToProps(dispatch){

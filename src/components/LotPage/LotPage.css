@@ -1,10 +1,10 @@
 .LotPage{
     width: 70%;
     height: auto;
-    min-width: 400px;
-    margin: 10% 15%;
+    min-width: 510px;
+    margin: 10% 15% 25px;
     padding: 15px 5%;
-    border: black 1px solid;
+    border: #777 1px solid;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     text-align: center;

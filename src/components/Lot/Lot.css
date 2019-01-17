@@ -105,6 +105,47 @@
     font-size: 12px;
 }
 
+.lot-page{
+    display: flex;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.lot-page .lot-details{
+    display: inline-block;
+    margin: 5% 5% 0 5%;
+    width: 100%;
+}
+
+.lot-page img{
+    height: auto;
+    margin-left: 5%;
+    min-width: 200px;
+    max-width: 100%;
+}
+
+.lot-page table{
+    margin-top: 5%;
+    width: 100%;
+}
+
+.lot-page td{
+    padding-left: 10px;
+}
+
+@media(max-width: 1166px){
+
+    .lot-page {
+        background-color: #E7D62D;
+        min-width: 400px;
+
+    }
+
+    .lot-page .description{
+        display: none;
+    }
+
+}
 
 
 

@@ -1,8 +1,11 @@
 export const ADD_LOT ='ADD_LOT';
 export const REMOVE ='REMOVE';
+export const CHANGE = 'CHANGE';
 export const GET = 'GET';
 // export const GET_LOT_BY_ID = 'GET_LOT_BY_ID';
 export const CURRENT_LOT = 'CURRENT_LOT';
+export const BAN = 'BAN';
+export const UNBAN = 'UNBAN';
 
 
 export function addLot(lot){
@@ -12,10 +15,17 @@ export function addLot(lot){
     }
 }
 
-export function rmLot(lotID) {
+export function rmLot(lot) {
     return{
         type: REMOVE,
-        lotID: lotID
+        lot: lot
+    }
+}
+
+export function changeLot(changedLot) {
+    return{
+        type: CHANGE,
+        lot: changedLot
     }
 }
 
@@ -42,10 +52,26 @@ export function getList() {
 //     }
 // }
 
-export function setCurrentLot(lotID) {
+export function setCurrentLot(lot) {
     return{
         type: CURRENT_LOT,
-        currentLot: lotID
+        currentLot: lot
     }
 }
+
+export function ban(user) {
+    return{
+        type: BAN,
+        banned: user
+    }
+}
+
+export function unban(user) {
+    return{
+        type: UNBAN,
+        unbanned: user
+    }
+}
+
+
 
