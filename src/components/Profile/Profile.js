@@ -3,13 +3,14 @@ import './Profile.css'
 import {Growl} from 'primereact/growl';
 import ExpertPage from "../ExpertPage/ExpertPage";
 import AdminPage from "../AdminPage/AdminPage";
+import UserPage from "../UserPage/UserPage";
 
 
 class Profile extends React.Component{
     constructor(props){
         super(props);
         this.state ={
-            role: 'expert',
+            role: 'user',
 
         };
 
@@ -18,7 +19,7 @@ class Profile extends React.Component{
         this.setExpert = this.setExpert.bind(this);
         this.renderExpert = this.renderExpert.bind(this);
         this.setUser = this.setUser.bind(this);
-        //this.renderUser = this.renderUser.bind(this);
+        this.renderUser = this.renderUser.bind(this);
 
 
     }
@@ -42,6 +43,10 @@ class Profile extends React.Component{
         return <AdminPage growl={this.growl}/>
     }
 
+    renderUser(){
+            return <UserPage/>
+    }
+
 
     render() {
         let renderPage = () => {
@@ -50,6 +55,8 @@ class Profile extends React.Component{
                     return this.renderAdmin();
                 case 'expert':
                     return this.renderExpert();
+                case 'user':
+                    return this.renderUser();
                 default: return <h2>NO ROLE SET</h2>
             }
         };

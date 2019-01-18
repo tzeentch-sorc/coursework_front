@@ -12,7 +12,8 @@ class Similar extends React.Component{
         this.state ={
             activeIndex: 0,
             byGenre: null,
-            byAuthor: null
+            byAuthor: null,
+            byTech: null
         };
         this.itemTemplate = this.itemTemplate.bind(this);
         this.updateSimilar = this.updateSimilar.bind(this);
@@ -29,7 +30,12 @@ class Similar extends React.Component{
                 (currentLot.author === item.author) && JSON.stringify(currentLot) !== JSON.stringify(item)
             )
         );
-        this.setState({byGenre: null, byAuthor: null}, ()=>this.setState({byGenre: newList, byAuthor: listAuthor}));
+        let listTech = items.filter(
+            item => (
+                (currentLot.technique === item.technique) && JSON.stringify(currentLot) !== JSON.stringify(item)
+            )
+        );
+        this.setState({byGenre: null, byAuthor: null, byTech: null}, ()=>this.setState({byGenre: newList, byAuthor: listAuthor, byTech:listTech}));
 
     }
 
@@ -56,8 +62,6 @@ class Similar extends React.Component{
 
 
     render() {
-                let genre = this.props.genre;
-                let lot = this.props.lot;
         return(
             <div>
                 <TabView
@@ -84,6 +88,17 @@ class Similar extends React.Component{
                             key={this.state.activeIndex}
                             value={
                                 this.state.byAuthor
+                            }
+                            itemTemplate={this.itemTemplate}
+                            rows={6}
+                            lazy={true}
+                        />
+                    </TabPanel>
+                    <TabPanel header={'By technique'}>
+                        <DataScroller
+                            key={this.state.activeIndex}
+                            value={
+                                this.state.byTech
                             }
                             itemTemplate={this.itemTemplate}
                             rows={6}

@@ -60,8 +60,12 @@ class LotPage extends React.Component{
                                 <td>{lot.genre}</td>
                             </tr>
                             <tr>
+                                <td>Techique:</td>
+                                <td>{lot.technique}</td>
+                            </tr>
+                            <tr>
                                 <td>Sertificate №:</td>
-                                <td>%CERTIFICATE_ID%</td>
+                                <td>{lot.certificate ? lot.certificate : 'NOT STATED'}</td>
                             </tr>
                             <tr>
                                 <td>Seller:</td>
