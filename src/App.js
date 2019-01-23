@@ -11,6 +11,9 @@ import LoginPage from "./components/LoginPage/LoginPage";
 import Register from "./components/Register/Register";
 import LotPage from "./components/LotPage/LotPage";
 import Profile from "./components/Profile/Profile";
+import {connect} from "react-redux";
+import {withRouter} from "react-router";
+import {setAuthorised, setUnAuth} from "./actions/login";
 
 class App extends Component {
   state = {
@@ -27,12 +30,13 @@ class App extends Component {
     this.setState({sideOpen: false});
   };
 
-  render() {
+
+    render() {
       let backdrop;
       if(this.state.sideOpen){
           backdrop = <BackDrop click={this.backdropClickHandler}/>
       }
-
+      let isAuth = this.props.isAuthorised;
     return (
       <div className="app">
         <Navbar drawerClickHandler={this.drawerToggleClickHandler}/>
@@ -43,13 +47,21 @@ class App extends Component {
                     <Route exact path="/" render={() => (
                             <Redirect to="/home"/>
                     )}/>
-                    <Route path={"/home"} component={Home}/>
-                    <Route path={"/lots"} component={Lots}/>
-                    <Route path={"/login"} component={LoginPage}/>
-                    <Route path={"/register"} component={Register}/>
-                    <Route path={"/lot"} component={LotPage}/>
-                    <Route path={"/profile"} component={Profile}/>
-                    <Route path='/404' component={Notfound} />
+                    <Route exact path={"/home"} component={Home}/>
+                    <Route exact path={"/login"} component={LoginPage}/>
+                    <Route exact path={"/register"} component={Register}/>
+                    <Route exact path='/404' component={Notfound} />
+
+                    {!isAuth?
+                        <Route exact path="/(lots|lot|profile)/" render={() => {
+                            return <Redirect to="/login"/>
+                        }}/> : ""
+                    }
+
+                    <Route exact path={"/lots"} component={Lots}/>
+                    <Route exact path={"/lot"} component={LotPage}/>
+                    <Route exact path={"/profile"} component={Profile}/>
+
                     <Redirect to={'/404'} />
                 </Switch>
         </main>
@@ -58,4 +70,7 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state){
+    return { isAuthorised: state.loginReducer.isAuthorised}
+}
+export default withRouter(connect(mapStateToProps)(App));

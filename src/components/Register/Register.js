@@ -6,7 +6,10 @@ import {InputText} from "primereact/inputtext";
 import {Password} from "primereact/password";
 import {FormErrors} from "../FormErrors/FormErrors";
 import {Growl} from 'primereact/growl';
-
+import axios from "axios";
+import {registryFail, registrySuccess} from "../../actions/login";
+import connect from "react-redux/es/connect/connect";
+import {urlPort} from "../../index";
 
 class Register extends React.Component{
 
@@ -28,16 +31,52 @@ class Register extends React.Component{
         this.handleChangePword = this.handleChangePword.bind(this);
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangeSname = this.handleChangeSname.bind(this);
-        this.showSuccess = this.showSuccess.bind(this);
-        this.onButtonClick = this.onButtonClick.bind(this);
+        this.Submit = this.Submit.bind(this);
+        this.onSuccessRedirect = this.onSuccessRedirect.bind(this);
     }
 
-    showSuccess() {
-        this.growl.show({life:5000,
-            severity: 'success',
-            summary: 'Success Message',
-            detail: 'Order submitted'
+
+
+    Submit() {
+        let params = new URLSearchParams();
+        params.append('mail', this.state.username);
+        params.append('password', this.state.password);
+        params.append('name', this.state.name);
+        params.append('surname', this.state.surname);
+        this.setState(
+            {
+                name:'',
+                surname:'',
+                username: '',
+                password: '',
+                emailValid: false,
+                passwordValid: false,
+                nameValid: false,
+                surnameValid: false,
+                formValid: false
+            }
+        );
+        axios.post(urlPort('/signUp'), params).then(
+            res => {
+                if(res.status === 200){
+                    this.props.regOK();
+                    this.growl.show({life:4000,
+                        severity: 'success',
+                        summary: 'Successful Registration',
+                        detail: 'Redirect on login page in a few seconds...'
+                    });
+                }
+            }
+        ).catch(err=>{
+            this.props.regFail();
+            this.growl.show({life:15000,
+                severity: 'error',
+                summary: 'Oops... It`s a ' + err.response.status + ' code error',
+                detail: err.response.data
+            });
         });
+
+
     }
 
     validateField(fieldName, value) {
@@ -56,11 +95,11 @@ class Register extends React.Component{
                 fieldValidationErrors.password = passwordValid ? '': ' is too short';
                 break;
             case 'name':
-                nameValid = value.length > 0;
+                nameValid = value.length >= 1;
                 fieldValidationErrors.name = nameValid ? '': ' is empty';
                 break;
             case 'surname':
-                surnameValid = value.length > 0;
+                surnameValid = value.length >= 1;
                 fieldValidationErrors.surname = surnameValid ? '': ' is empty';
                 break;
             default:
@@ -75,7 +114,9 @@ class Register extends React.Component{
     }
     validateForm() {
         this.setState({formValid: this.state.emailValid &&
-                this.state.passwordValid});
+                this.state.passwordValid &&
+                this.state.nameValid &&
+                this.state.surnameValid});
     }
 
     handleChangeUname(event) {
@@ -110,22 +151,20 @@ class Register extends React.Component{
     }
 
 
-    onButtonClick(){
-        let { history } = this.props;
-        history.push('/login');
+    onSuccessRedirect(){
+        if(this.props.regResult) {
+            let {history} = this.props;
+            history.push('/login');
+        }
     }
 
     render() {
         return (
             <div className={'r-page'}>
-
-                <Growl ref={(el) => this.growl = el}
-                       onRemove={this.onButtonClick}
-                />
-
-
+                <Growl ref={(el) => this.growl = el} onRemove={this.onSuccessRedirect}/>
                 <div className={"r-form"}>
                     <h2>REGISTRATION</h2>
+                    <h4>Please, fill all the spaces</h4>
                     <form>
                         <div className={"namesBorder"}>
                             <p>
@@ -159,7 +198,7 @@ class Register extends React.Component{
                                        onChange={this.handleChangeUname}
                                        placeholder="Email"
                                        className={"input"}
-                                       keyfilter={"email"}
+                                       // keyfilter={"email"}
                             />
                         </div>
                         <div>
@@ -179,13 +218,11 @@ class Register extends React.Component{
                             />
                         </div>
                     </form>
-                        <Button onClick={this.showSuccess}
+                        <Button onClick={this.Submit}
                                 label="Register"
                                 className="p-button-success p-button-raised"
                                 disabled={!this.state.formValid ? "disabled" : ""}
                         />
-                        <Button label="Google(Temp)"
-                                className="p-button-success p-button-raised" />
 
 
                     <div className={'errorPanel'}>
@@ -197,4 +234,15 @@ class Register extends React.Component{
     }
 }
 
-export default withRouter(Register);
+function mapStateToProps(state){
+    return { regResult: state.loginReducer.regResult}
+}
+
+function mapDispatchToProps(dispatch){
+    return {
+        regOK: ()=>dispatch(registrySuccess()),
+        regFail: ()=>dispatch(registryFail())
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Register));

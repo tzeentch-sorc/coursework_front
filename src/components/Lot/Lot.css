@@ -39,7 +39,8 @@
     height: auto;
     margin-left: 5%;
     min-width: 200px;
-    max-width: 100%;
+    max-width: 300px;
+    max-height: 200px;
 }
 
 .list .lot-details{

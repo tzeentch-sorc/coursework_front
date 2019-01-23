@@ -1,4 +1,4 @@
-import {ADD_LOT, CHANGE, GET, REMOVE} from "../actions/listAction";
+import {ADD_LOT, CHANGE, SET_LIST, REMOVE} from "../actions/listAction";
 
 export default function lotListReducer(state = {items:[]}, action) {
     let position;
@@ -12,6 +12,7 @@ export default function lotListReducer(state = {items:[]}, action) {
             position = state.items.findIndex((obj =>
                 obj.id === action.lot.id
             ));
+
             state.items[position] = action.lot;
             return{
                 items: state.items
@@ -24,9 +25,9 @@ export default function lotListReducer(state = {items:[]}, action) {
             return {
               items: upd
             };
-        case GET:
+        case SET_LIST:
             return {
-                items: []
+                items: action.lots
             };
         default: return state;
     }

@@ -4,70 +4,56 @@ import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import {createStore, applyMiddleware} from "redux";
 import thunk from 'redux-thunk';
-//import Similar from './components/Similar/Similar'
 import { composeWithDevTools } from 'redux-devtools-extension';
-
-// import ReduxStateChangeListener from 'redux-state-change-listener'
-
 import './index.css'
 import {Provider} from "react-redux";
-import rootReducer from "./reducers/rootReducer";
+import rootReducer from "./reducers/rootReducer"
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { PersistGate } from 'redux-persist/integration/react'
+//import Similar from './components/Similar/Similar'
+// import ReduxStateChangeListener from 'redux-state-change-listener';
+
 
 //const ReduxStateChangeListener = require('redux-state-change-listener');
+const persistConfig = {
+    key: 'root',
+    storage,
+};
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+
+const composeEnhancers = composeWithDevTools({});
 
 const date = new Date().toDateString();
-
-const composeEnhancers = composeWithDevTools({
-    // Specify name here, actionsBlacklist, actionsCreators and other options if needed
-});
-
-const desc ='Artifex аrmifer digitis dextris oculis occultis!Oh great Machine God, we beseech thee to deliver us from danger\n' +
-    '                            Oh great Machine God, we beseech thee to bring life into the inanimate\n' +
-    '                            Oh great Machine God, we beseech thee to invest this metal carcass with your spirit\n' +
-    '                            Oh great Machine God, we beseech thee to bring forth the holy en-djinnMay your weapon be guarded against malfunction.\n' +
-    '                            As your soul is guarded from impurity.\n' +
-    '                            The Machine God watches over you.\n' +
-    '                            Unleash the weapons of war.\n' +
-    '                            Unleash the Deathdealer.Toll the Great Bell once!\n' +
-    '                            Pull the Lever forward to engage the\n' +
-    '                            Piston and Pump…';
-
-const store = createStore(rootReducer,
+const desc ='Одна из наиболее известных картин нидерландского художника-постимпрессиониста Винсента Ван Гога. Представляет вид из восточного окна спальни Ван Гога в Сен-Реми-де-Прованс на предрассветное небо и вымышленную деревню. Картина написана в июне 1889 года;';
+let store = createStore(persistedReducer,
     {
         loginReducer: {
-            isAuthorised: true
+            isAuthorised: false,
+            regResult: false,
+            role: null
         },
         currentLotReducer:{
             currentLot: {
-                id: 1,
-                name: 'hello1',
-                author: 'Ван Гог, Винсент',
-                genre: 'a',
+                id: 2,
+                name: 'Omnissiah`s sign',
+                author: 'Servitor#321212',
+                genre: 'b',
+                technique: 'a',
                 expDate: date,
                 seller: 'King Arthur',
                 bet: 1000,
                 description: desc,
-                certificate: ''
+                certificate: 123456
             }
         },
         lotListReducer:{
             items: [
                 {
-                    id: 1,
-                    name: 'hello1',
-                    author: 'Ван Гог, Винсент',
-                    genre: 'a',
-                    technique: 'a',
-                    expDate: date,
-                    seller: 'King Arthur',
-                    bet: 1000,
-                    description: desc,
-                    certificate: ''
-                },
-                {
                     id: 2,
-                    name: 'hello2',
-                    author: 'Ван Гог, Винсент',
+                    name: 'Omnissiah`s sign',
+                    author: 'Servitor#321212',
                     genre: 'b',
                     technique: 'a',
                     expDate: date,
@@ -78,15 +64,27 @@ const store = createStore(rootReducer,
                 },
                 {
                     id: 3,
-                    name: 'hello3',
+                    name: 'Звёздная ночь',
                     author: 'Ван Гог, Винсент',
+                    genre: 'постимпрессионизм',
+                    technique: 'Холст, масло.',
                     expDate: date,
-                    genre: 'a',
-                    technique: 'a',
-                    seller: 'King Arthur',
+                    seller: 'Солдатов Игорь',
                     bet: 1000,
                     description: desc,
-                    certificate: 123456
+                    certificate: ''
+                },
+                {
+                    id: 1,
+                    name: 'Звёздная ночь',
+                    author: 'Ван Гог, Винсент',
+                    genre: 'постимпрессионизм',
+                    technique: 'Холст, масло.',
+                    expDate: date,
+                    seller: 'Солдатов Игорь',
+                    bet: 1000,
+                    description: desc,
+                    certificate: ''
                 },
                 {
                     id: 4,
@@ -239,9 +237,13 @@ const store = createStore(rootReducer,
         }
     },
     composeEnhancers(
-    applyMiddleware(thunk),
-    // other store enhancers if any
+    applyMiddleware(thunk)
 ));
+
+let persistor = persistStore(store);
+export default () => {
+    return { store, persistor }
+}
 
 // const onCurLotChanged = (currentLot, state) => {
 //     Similar.upd(state.lotListReducer.items, currentLot);
@@ -249,11 +251,22 @@ const store = createStore(rootReducer,
 // const stateCallbackManager = new ReduxStateChangeListener(store);
 // stateCallbackManager.register(state => state.currentLotReducer.currentLot, onCurLotChanged);
 // stateCallbackManager.start();
+// export const axiosInstance = axios.create({
+//     baseURL: 'http://localhost:10880/',
+//     timeout: 2000
+// });
+
 
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <PersistGate loading={null} persistor={persistor}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </PersistGate>
     </Provider>,
     document.getElementById('root'));
+
+export function urlPort(url) {
+    return 'http://localhost:10880'+url;
+}

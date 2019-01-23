@@ -2,8 +2,27 @@
     width: 90%;
     height: auto;
     min-width: 400px;
-    margin: 10% 5%;
+    margin: 30px auto;
     border-radius: 5px;
     text-align: center;
     min-height: 800px;
 }
+
+.buttonPage{
+    text-align: right;
+    min-width: 500px;
+    margin: 0 5% 0 15%;
+}
+
+.buttonPage .btn{
+    text-align: center;
+    max-width: 25%;
+    border-radius: 0;
+}
+
+.sett{
+    width: 100%;
+    margin-bottom: 10px !important;
+    padding-top: 5px !important;
+}
+

@@ -3,6 +3,12 @@ import {InputText} from "primereact/inputtext";
 import {Password} from "primereact/password";
 import './LoginForm.css'
 import {Button} from "primereact/button";
+import axios from 'axios'
+import {setAuthorised, setUnAuth} from "../../actions/login";
+import {Link, withRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import {Growl} from "primereact/growl";
+import {urlPort} from "../../index";
 
 class LoginForm extends React.Component{
     constructor(props) {
@@ -14,11 +20,43 @@ class LoginForm extends React.Component{
         this.handleChangeUname = this.handleChangeUname.bind(this);
         this.handleChangePword = this.handleChangePword.bind(this);
         this.Authorise = this.Authorise.bind(this);
+        this.authGoogle = this.authGoogle.bind(this);
     }
 
     Authorise(event){
-        let history = this.props.history;
-        history.push('/profile');
+        event.preventDefault();
+        const growlCtx =this.growl;
+        var params = new URLSearchParams();
+        params.append('username', this.state.username);
+        params.append('password', this.state.password);
+        axios.post(urlPort('/login'), params,{withCredentials: true})
+            .then(
+            res => {
+                axios.get(urlPort('/role'), {withCredentials: true}).then( res=>
+                    {
+                        this.props.authOK(res.data);
+                        let history = this.props.history;
+                        history.push('/profile');
+                    }
+                ).catch(
+                    err => {
+                        this.props.authFail();
+                        alert(JSON.stringify(err))
+                        //growlCtx.show({severity: 'error', summary: 'Not authorised', detail: 'Not authorised'});
+                    }
+                )
+            }
+            ).catch(
+                err=>{
+                    this.props.authFail();
+                    this.growl.show({severity: 'error', summary: 'Not authorised', detail: 'Not authorised'});
+                }
+        );
+
+    }
+
+    authGoogle() {
+        window.location='http://localhost:10880/login/google';
     }
 
     handleChangeUname(event) {
@@ -29,10 +67,18 @@ class LoginForm extends React.Component{
         this.setState({password: event.target.value});
     }
 
+    componentDidMount(){
+        if(!this.props.isAuthorised)
+            this.growl.show({severity: 'warn', summary: 'Not authorised', detail: 'You should log in before going there'});
+    }
+
+
+
     render() {
         return(
             <div className={"l-form"}>
-                <form>
+                <Growl ref={(el) => this.growl = el}/>
+                <div>
                     <div className="p-inputgroup">
                     <span className="p-inputgroup-addon">
                         <i className="pi pi-user"/>
@@ -56,12 +102,25 @@ class LoginForm extends React.Component{
                         />
                     </div>
                     <Button onClick={this.Authorise} label="Login" className="p-button-success p-button-raised" />
-                    <Button label="Google(Temp)" className="p-button-success p-button-raised" />
-                </form>
+                    <div onClick={this.authGoogle} className="fa fa-google"/>
+
+
+                </div>
             </div>
         );
     }
 
 }
 
-export default LoginForm;
+function mapStateToProps(state){
+    return { isAuthorised: state.loginReducer.isAuthorised}
+}
+
+function mapDispatchToProps(dispatch){
+    return {
+        authOK: (role)=>dispatch(setAuthorised(role)),
+        authFail: ()=>dispatch(setUnAuth())
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginForm));

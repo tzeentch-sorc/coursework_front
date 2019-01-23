@@ -5,6 +5,8 @@ import './LotPage.css'
 import Vangog from './../../resources/vangog.jpg'
 import {Fieldset} from "primereact/fieldset";
 import Similar from "../Similar/Similar";
+import {Button} from "primereact/button";
+import {addHandler, sendMessage, connectWS} from "../../util/ws";
 
 
 class LotPage extends React.Component{
@@ -12,7 +14,8 @@ class LotPage extends React.Component{
         super(props);
         this.state ={
             lot: null
-        }
+        };
+        connectWS();
     }
 
     componentWillMount() {
@@ -29,6 +32,16 @@ class LotPage extends React.Component{
     // componentDidUpdate(nextProps, nextState, nextContext) {
     //
     // }
+    componentDidMount() {
+        addHandler(data => {
+            alert(JSON.stringify(data));
+            this.setState(data)
+        })
+    }
+
+    doBet(){
+        sendMessage({priceStr: this.props.currentLot.bet+100, lotId: this.props.currentLot.id})
+    }
 
     render() {
         const lot = this.props.currentLot;
@@ -82,10 +95,12 @@ class LotPage extends React.Component{
                             </tbody>
                         </table>
                     </div>
+                    <Button onClick={this.doBet.bind(this)}>doBet</Button>
                     <hr/>
                     <Fieldset legend={lot.name}>
                         {lot.description}
                     </Fieldset>
+                    <br/>
                 </div>
                 <div className={"SimilarPage"}>
                     <Similar genre={lot.genre}/>

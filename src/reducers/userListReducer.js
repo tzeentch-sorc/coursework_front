@@ -1,4 +1,4 @@
-import {BAN, UNBAN} from "../actions/listAction";
+import {BAN, SET_BANNED, SET_USERS, UNBAN} from "../actions/listAction";
 
 export default function userListReducer(state = {users:[], banned:[]}, action) {
     let filtered;
@@ -20,6 +20,16 @@ export default function userListReducer(state = {users:[], banned:[]}, action) {
             return {
                 users: [...state.users, action.unbanned],
                 banned: filtered
+            };
+        case SET_USERS:
+            return{
+                users: action.users,
+                banned: state.banned
+            };
+        case SET_BANNED:
+            return{
+                users: state.users,
+                banned : action.banned
             };
         default: return state;
     }

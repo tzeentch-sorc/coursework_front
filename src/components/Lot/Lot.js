@@ -1,5 +1,6 @@
 import React from 'react'
 import Pict from '../../resources/pict.png';
+import VG from '../../resources/vangog.jpg';
 import {ScrollPanel} from 'primereact/scrollpanel';
 import './Lot.css'
 import {withRouter} from "react-router-dom";
@@ -20,9 +21,13 @@ class Lot extends React.Component{
     }
 
     render() {
+            let img;
+            if (this.props.lot.id===1)
+                img = VG;
+            else img = Pict;
             return (
                 <div style={{ padding: '.5em' }} className={"lot " + this.props.renderType} onClick={this.handleClick}>
-                    <img src={Pict} alt=""/>
+                    <img src={img} alt=""/>
                     <div className={"lot-details"}>
 
                             <table>

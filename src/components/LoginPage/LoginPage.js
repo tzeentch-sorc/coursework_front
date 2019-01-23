@@ -12,9 +12,14 @@ class LoginPage extends React.Component{
         history.push('/register');
     }
 
+    componentDidMount() {
+
+    }
+
     render() {
         return (
             <div className={'l-page'}>
+
                 <LoginForm history={this.props.history}/>
                 <hr/>
                 <div>

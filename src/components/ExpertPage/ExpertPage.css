@@ -1,0 +1,12 @@
+.info td{
+    border-right: 1px solid #777;
+    border-left: 1px solid #777;
+    padding: 5px;
+}
+
+.p-lightbox img{
+    text-align: center;
+    max-width: 800px;
+    max-height: 800px;
+    height: auto;
+}

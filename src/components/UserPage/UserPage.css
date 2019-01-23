@@ -2,11 +2,32 @@
     width: 80%;
     height: auto;
     min-width: 500px;
-    margin: 10% 15% 25px;
+    margin: 30px 15% 25px;
     padding: 15px 5%;
     border: #777 1px solid;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    text-align: center;
+    /*text-align: center;*/
     background: white;
+}
+
+.profile-main{
+    width: 100%;
+    margin: 10px 10px;
+}
+
+.desc-area{
+    max-width: 450px;
+    max-height: 300px;
+    min-width: 200px;
+    min-height: 100px;
+}
+
+.p-float-label{
+    text-align: center;
+}
+
+.pict-info{
+    width: 100%;
+    margin-bottom: 10px;
 }

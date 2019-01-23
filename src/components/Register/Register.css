@@ -13,6 +13,13 @@
     width: 100%;
 }
 
+.r-form h4{
+    margin-top: 0;
+}
+.r-form h2{
+    margin-bottom: 0;
+}
+
 .r-form .p-inputgroup{
     margin: 10px;
     width: 100%;
